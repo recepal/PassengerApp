@@ -22,6 +22,11 @@ namespace PassengerApp.Storage
             _context = new CrudContext(connectionString);
         }
 
+        public async Task<Passenger> Get(Guid id)
+        {
+            return await _context.Passengers.FirstOrDefaultAsync(f => f.UniquePassengerId == id);
+        }
+
         public async Task<bool> Insert(T entity)
         {
             _context.Set<T>().Add(entity);

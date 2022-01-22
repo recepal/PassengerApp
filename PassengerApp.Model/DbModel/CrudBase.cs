@@ -8,6 +8,7 @@ namespace PassengerApp.Model
 {
     public class CrudBase
     {
+        
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
