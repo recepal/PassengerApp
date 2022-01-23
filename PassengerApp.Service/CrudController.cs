@@ -7,7 +7,7 @@ namespace PassengerApp.Service
 {
     [Route("[controller]")]
     [ApiController]
-    public class CrudController:ControllerBase
+    public class CrudController : ControllerBase
     {
         private CrudRepository<Passenger> repo;
         private readonly IMemoryCache _memoryCache;
@@ -18,29 +18,39 @@ namespace PassengerApp.Service
             _memoryCache = memoryCache;
         }
 
-        [HttpGet("test")]
-        public ActionResult Test()
+        [HttpGet("passenger/{id}")]
+        public async Task<Passenger> Passenger(Guid id)
         {
-            return Ok("test");
+            return await repo.Get(id);
         }
 
         [HttpPost("passenger")]
         public async Task<ActionResult<bool>> Passenger(Passenger passenger)
         {
-           // _memoryCache.CreateEntry(passenger);
-
             bool result = await repo.Insert(passenger);
             return result;
         }
 
         [HttpPut("Passenger")]
-        public async Task<ActionResult> UpdatePassenger(Passenger passenger)
+        public async Task<ActionResult<bool>> UpdatePassenger(Passenger passenger)
         {
-            //_memoryCache.
-
             bool result = await repo.Update(passenger);
-            string message = result ? "Kayıt tamamlandı" : "Kayıt tamamlanmadı..";
-            return Ok(message);
+            return result;
+        }
+
+        [HttpGet("deletePassenger/{id}")]
+        public async Task<bool> DeletePassenger(Guid id)
+        {
+            var passenger = await repo.Get(id);
+            passenger.IsDeleted = true;
+            bool result = await repo.Update(passenger);
+            return result;
+        }
+
+        [HttpGet("test")]
+        public ActionResult Test()
+        {
+            return Ok("test");
         }
     }
 }

@@ -11,10 +11,9 @@ static async Task Run()
     Passenger passenger = new();
 
     passenger.UniquePassengerId = Guid.NewGuid();
-    passenger.Name = "asdsa";
-    passenger.Surname = "sdfs";
-    passenger.DocumentNo = "324";
-
+    passenger.Name = "Passenger";
+    passenger.Surname = "Passenger Surname";
+    passenger.DocumentNo = "0001";
     await t1.Insert(passenger);
     
     Ticket t2 = new Sceniro2();

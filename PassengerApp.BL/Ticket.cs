@@ -9,10 +9,10 @@ namespace PassengerApp.BL
         abstract public void Network();
         abstract public void Country();
 
-        public async Task<string> Get()
+        public async Task<Passenger> Get(string id)
         {
             ApiClient apiClient = new();
-            string result = await apiClient.Get<string>("crud/test");
+            var result = await apiClient.Get<Passenger>($@"crud/passenger/{id}");
 
             return result;
         }
@@ -24,6 +24,7 @@ namespace PassengerApp.BL
 
             return result;
         }
+
         public async Task<bool> Update(Passenger passenger) {
 
             ApiClient apiClient = new();
@@ -32,6 +33,13 @@ namespace PassengerApp.BL
             return result;
         }
 
+        public async Task<Passenger> Delete(string id)
+        {
+            ApiClient apiClient = new();
+            var result = await apiClient.Get<Passenger>($@"crud/deletePassenger/{id}");
+
+            return result;
+        }
     }
 
     public class Sceniro1 : Ticket
