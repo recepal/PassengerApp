@@ -25,13 +25,12 @@ namespace PassengerApp.Service
         }
 
         [HttpPost("passenger")]
-        public async Task<ActionResult> Passenger(Passenger passenger)
+        public async Task<ActionResult<bool>> Passenger(Passenger passenger)
         {
            // _memoryCache.CreateEntry(passenger);
 
             bool result = await repo.Insert(passenger);
-            string message = result ? "Kayıt tamamlandı" : "Kayıt tamamlanmadı..";
-            return Ok(message);
+            return result;
         }
 
         [HttpPut("Passenger")]

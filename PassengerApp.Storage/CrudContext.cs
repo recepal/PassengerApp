@@ -7,7 +7,7 @@ namespace PassengerApp.Storage
     {
         public DbSet<Passenger> Passengers { get; set; }
 
-        private readonly string _connectionString = "User ID=postgres; Password=deva; Host=localhost; Port=5432; Database=PassengerDb; Pooling=false; Timeout=300; CommandTimeout=180;";
+        private readonly string _connectionString = "";
         public CrudContext() { }
 
         public CrudContext(string connectionString)

@@ -9,20 +9,27 @@ namespace PassengerApp.BL
         abstract public void Network();
         abstract public void Country();
 
+        public async Task<string> Get()
+        {
+            ApiClient apiClient = new();
+            string result = await apiClient.Get<string>("crud/test");
+
+            return result;
+        }
+
         public async Task<bool> Insert(Passenger passenger)
         {
             ApiClient apiClient = new();
-            bool result = await apiClient.Post<bool>("/crud/passenger", passenger);
+            bool result = await apiClient.Post<bool>("crud/passenger", passenger);
 
             return result;
         }
         public async Task<bool> Update(Passenger passenger) {
 
             ApiClient apiClient = new();
-            bool result = await apiClient.Post<bool>("/crud/updatePassenger", passenger);
+            bool result = await apiClient.Post<bool>("crud/updatePassenger", passenger);
 
             return result;
-
         }
 
     }
